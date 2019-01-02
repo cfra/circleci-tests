@@ -16,3 +16,4 @@ jobs:
           name: Create bar
       - store_artifacts:
           path: output
+          destination: /
