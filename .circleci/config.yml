@@ -1,19 +1,18 @@
-jobs:
-  test-build:
-    - run:
-      command: mkdir -p output
-      name: Create directory
-    - run:
-      command: touch output/foo
-      name: Create foo
-    - run:
-      command: touch output/bar
-      name: Create bar
-    - store_artifacts:
-        path: output
-
 version: 2
-workflows:
-  test-build:
-    jobs:
-      - test-build
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+        command: mkdir -p output
+        name: Create directory
+      - run:
+        command: touch output/foo
+        name: Create foo
+      - run:
+        command: touch output/bar
+        name: Create bar
+      - store_artifacts:
+          path: output
