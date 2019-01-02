@@ -9,10 +9,10 @@ jobs:
           command: mkdir -p output
           name: Create directory
       - run:
-          command: touch output/foo
+          command: echo "Foo" > output/foo
           name: Create foo
       - run:
-          command: touch output/bar
+          command: echo "Bar" > output/bar
           name: Create bar
       - store_artifacts:
           path: output
