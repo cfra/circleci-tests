@@ -2,18 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:stretch
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - run:
-          command: mkdir -p output
-          name: Create directory
-      - run:
-          command: echo "Foo" > output/foo
-          name: Create foo
-      - run:
-          command: echo "Bar" > output/bar
-          name: Create bar
-      - store_artifacts:
-          path: output
-          destination: /
+          name: Commit some nonsense with CircleCI
+          command: |
+            git config --global user.email "$CIRCLE_USERNAME@users.noreply.github.com"
+            git config --global user.name "$CIRCLE_USERNAME"
+            date > TIMESTAMP
+            git add TIMESTAMP
+            git commit -m 'Update TIMESTAMP'
+            git remote add origin-update "git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git"
+            git push origin-update "HEAD:${CIRCLE_BRANCH}"
