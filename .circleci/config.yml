@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  prettier: cfra/prettier@0.1.0
+  prettier: cfra/prettier@0.1.1
 
 workflows:
   version: 2
