@@ -1,17 +1,10 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - checkout
-      - run:
-          name: Commit some nonsense with CircleCI
-          command: |
-            git config --global user.email "$CIRCLE_USERNAME@users.noreply.github.com"
-            git config --global user.name "$CIRCLE_USERNAME"
-            date > TIMESTAMP
-            git add TIMESTAMP
-            git commit -m 'Update TIMESTAMP'
-            git remote add origin-update "git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git"
-            git push origin-update "HEAD:${CIRCLE_BRANCH}"
+version: 2.1
+
+orbs:
+  prettier: cfra/prettier@0.1.0
+
+workflows:
+  version: 2
+  pretty:
+    jobs:
+      - prettier/write-commit-push
